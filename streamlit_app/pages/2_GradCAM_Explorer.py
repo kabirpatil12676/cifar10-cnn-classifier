@@ -139,9 +139,9 @@ else:
     st.divider()
 
     c1, c2, c3 = st.columns(3)
-    c1.image(orig_disp,   caption="📷 Original Image",       use_container_width=True, clamp=True)
-    c2.image(heatmap_rgb, caption=f"🌡️ GradCAM ({colormap})",use_container_width=True, clamp=True)
-    c3.image(overlay,     caption="🔥 Overlay (blended)",    use_container_width=True, clamp=True)
+    c1.image(orig_disp,   caption="📷 Original Image",       width='stretch', clamp=True)
+    c2.image(heatmap_rgb, caption=f"🌡️ GradCAM ({colormap})",width='stretch', clamp=True)
+    c3.image(overlay,     caption="🔥 Overlay (blended)",    width='stretch', clamp=True)
 
     st.caption(
         f"Red/bright = high importance for **{pred_cls}** via **{layer_choice}**."

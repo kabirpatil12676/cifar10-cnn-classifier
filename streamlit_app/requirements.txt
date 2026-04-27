@@ -1,7 +1,7 @@
 # ── Core ─────────────────────────────────────────────────────────────────────
 # FIX: no +cuXXX suffix — Streamlit Cloud is CPU-only
 # FIX: torchaudio removed — not needed; reduces cold-start time
-streamlit>=1.32.0
+streamlit>=1.40.0
 torch>=2.3.0
 torchvision>=0.18.0
 

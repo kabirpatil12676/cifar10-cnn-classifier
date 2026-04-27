@@ -153,7 +153,7 @@ if show_thumbnails:
     st.markdown("**Predictions (with thumbnails):**")
     for row_idx, (_, row) in enumerate(df.iterrows()):
         img_col, data_col = st.columns([1, 8])
-        img_col.image(thumbnails[row_idx], use_container_width=True)
+        img_col.image(thumbnails[row_idx], width='stretch')
         flag = "⚠️ Low" if row["low_confidence"] else "✅"
         data_col.markdown(
             f"**{row['filename']}** → **{row['predicted_class']}** "
@@ -169,14 +169,14 @@ else:
         return ["background-color: #3d1515" if flag else ""] * len(row)
     st.dataframe(
         display_df.style.apply(_row_style, axis=1),
-        use_container_width=True, hide_index=True,
+        width='stretch', hide_index=True,
     )
 
 st.divider()
 
 st.subheader("🥧 Predicted Class Distribution")
 class_counts = df["predicted_class"].value_counts().to_dict()
-st.plotly_chart(prediction_pie_chart(class_counts), use_container_width=True)
+st.plotly_chart(prediction_pie_chart(class_counts), width='stretch')
 
 st.divider()
 
@@ -191,6 +191,6 @@ st.download_button(
     data=csv_bytes,           # FIX: bytes, not string
     file_name="cifar10_batch_predictions.csv",
     mime="text/csv",
-    use_container_width=True,
+    width='stretch',
 )
 st.caption("CSV columns: filename, predicted_class, confidence, top2_class, top2_confidence, inference_time_ms")

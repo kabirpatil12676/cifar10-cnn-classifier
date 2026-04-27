@@ -121,7 +121,7 @@ with col_up:
 
     with tab_sample:
         sel_class = st.selectbox("Select class", CIFAR10_CLASSES, key="sample_class")
-        if st.button("Load sample", use_container_width=True):
+        if st.button("Load sample", width='stretch'):
             samples = _get_class_samples(sel_class, n=1)
             if samples:
                 pil_image = Image.open(io.BytesIO(samples[0])).convert("RGB")
@@ -138,14 +138,14 @@ with col_up:
 
     if pil_image is not None:
         st.image(pil_image.resize((200, 200)), caption="Input image",
-                 use_container_width=False)
+                 width='content')
 
     if show_preprocess and pil_image is not None:
         with st.expander("Augmentation Preview", expanded=True):
             samples_aug = get_augmentation_samples(pil_image)
             aug_cols    = st.columns(3)
             for idx, (name, aug_img) in enumerate(samples_aug.items()):
-                aug_cols[idx % 3].image(aug_img, caption=name, use_container_width=True)
+                aug_cols[idx % 3].image(aug_img, caption=name, width='stretch')
 
 # ── Inference ─────────────────────────────────────────────────────────────────
 with col_res:
@@ -194,6 +194,6 @@ with col_res:
                 exp_cols = st.columns(4)
                 for i, (ec, img_bytes) in enumerate(zip(exp_cols, real_imgs)):
                     ec.image(img_bytes, caption=f"{pred_class} #{i+1}",
-                             use_container_width=True)
+                             width='stretch')
             else:
                 st.info("CIFAR-10 samples not available.", icon="ℹ️")

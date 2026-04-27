@@ -149,21 +149,21 @@ with tab2:
             key=lambda c: per_class_data[c].get(sort_by, 0), reverse=True,
         )
         sorted_data = {c: per_class_data[c] for c in sorted_classes}
-        st.plotly_chart(per_class_metrics_chart(sorted_data), use_container_width=True)
+        st.plotly_chart(per_class_metrics_chart(sorted_data), width='stretch')
         rows = [
             {"Class": cls, "Precision": f"{v['precision']:.3f}",
              "Recall": f"{v['recall']:.3f}", "F1-Score": f"{v['f1']:.3f}"}
             for cls, v in sorted_data.items()
         ]
-        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
 
 with tab3:
-    st.plotly_chart(training_curves_chart(history), use_container_width=True)
+    st.plotly_chart(training_curves_chart(history), width='stretch')
     if not syn_history and "val_acc" in history:
         best_epoch = int(np.argmax(history["val_acc"])) + 1
         best_acc   = float(max(history["val_acc"]))
         st.caption(f"Best val accuracy: **{best_acc:.2f}%** at epoch **{best_epoch}**")
-    st.plotly_chart(per_class_accuracy_bar(cm), use_container_width=True)
+    st.plotly_chart(per_class_accuracy_bar(cm), width='stretch')
 
 with tab4:
     st.markdown("**Top-10 most confused class pairs** (highest off-diagonal values).")
@@ -180,6 +180,6 @@ with tab4:
     df_err = pd.DataFrame(top10)
     st.dataframe(
         df_err.style.background_gradient(subset=["Misclassifications"], cmap="Reds"),
-        use_container_width=True, hide_index=True,
+        width='stretch', hide_index=True,
     )
     st.caption("cat↔dog and automobile↔truck are typically the hardest pairs at 32×32 resolution.")

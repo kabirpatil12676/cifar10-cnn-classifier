@@ -74,7 +74,7 @@ st.subheader("📊 Class Distribution")
 # FIX: both branches were identical — simplified
 train_counts = {cls: 5000 for cls in CIFAR10_CLASSES}
 test_counts  = {cls: 1000 for cls in CIFAR10_CLASSES}
-st.plotly_chart(class_distribution_bar(train_counts, test_counts), use_container_width=True)
+st.plotly_chart(class_distribution_bar(train_counts, test_counts), width='stretch')
 st.caption("CIFAR-10 is **perfectly balanced** — 5,000 train + 1,000 test images per class.")
 
 st.divider()
@@ -108,7 +108,7 @@ if dataset_loaded and selected_classes:
         st.markdown(f"**{cls_name.capitalize()}**")
         img_cols = st.columns(n_cols)
         for col, img in zip(img_cols, class_samples.get(cls_name, [])):
-            col.image(img, use_container_width=True)
+            col.image(img, width='stretch')
 
 elif selected_classes:
     st.info("Dataset not loaded — showing placeholder tiles.", icon="ℹ️")
@@ -118,7 +118,7 @@ elif selected_classes:
         img_cols = st.columns(n_cols)
         for col in img_cols:
             rgb = tuple(rng.integers(80, 200, 3).tolist())
-            col.image(Image.new("RGB", (64,64), color=rgb), use_container_width=True)
+            col.image(Image.new("RGB", (64,64), color=rgb), width='stretch')
 else:
     st.info("Select at least one class in the sidebar.", icon="ℹ️")
 
@@ -165,7 +165,7 @@ else:
 aug_samples = get_augmentation_samples(raw_pil)
 aug_cols    = st.columns(3)
 for idx, (name, aug_img) in enumerate(aug_samples.items()):
-    aug_cols[idx % 3].image(aug_img, caption=name, use_container_width=True)
+    aug_cols[idx % 3].image(aug_img, caption=name, width='stretch')
 
 st.divider()
 

@@ -1,8 +1,6 @@
 """
-Home.py  —  Entry point for the CIFAR-10 CNN Classifier Streamlit app.
-Renamed from app.py so the sidebar shows "Home" instead of "app".
-
-Streamlit Cloud deployment:  set Main file path → streamlit_app/Home.py
+Home.py  —  Home page UI only.
+Model loading and st.set_page_config are handled by app.py (entry point).
 """
 from __future__ import annotations
 
@@ -14,62 +12,39 @@ import streamlit as st
 ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT))
 
-st.set_page_config(
-    page_title="CIFAR-10 Classifier",
-    page_icon="assets/favicon.png" if (ROOT / "assets" / "favicon.png").exists() else "🔬",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        "Get Help": "https://github.com/kabirpatil12676/cifar10-cnn-classifier",
-        "Report a bug": "https://github.com/kabirpatil12676/cifar10-cnn-classifier/issues",
-        "About": "CIFAR-10 CNN Classifier — Production PyTorch demo by Kabir Patil.",
-    },
-)
-
-from utils.model_loader import load_model  # noqa: E402
-
-
-@st.cache_resource(show_spinner="Loading model weights…")
-def _get_model():
-    return load_model(ROOT / "checkpoints" / "best_model.pth")
-
-
-model, model_meta = _get_model()
-
+# Model loaded by app.py — read from session_state
 if "model" not in st.session_state:
-    st.session_state["model"] = model
-if "model_meta" not in st.session_state:
-    st.session_state["model_meta"] = model_meta
+    st.error("Please start the app via app.py so the model can initialise.")
+    st.stop()
 
-# ── Global CSS ─────────────────────────────────────────────────────────────────
+model      = st.session_state["model"]
+model_meta = st.session_state["model_meta"]
+
+# ── CSS ───────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
-
 .hero-title {
     font-size: 2.8rem; font-weight: 800; letter-spacing: -0.5px;
     background: linear-gradient(135deg, #4F8EF7 0%, #A78BFA 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     margin-bottom: 0.15rem;
 }
-.hero-sub {
-    font-size: 1.05rem; color: #6B7280; margin-bottom: 1.8rem; font-weight: 400;
-}
+.hero-sub { font-size: 1.05rem; color: #6B7280; margin-bottom: 1.8rem; }
 .stat-card {
     background: #161B27; border: 1px solid #1F2937;
     border-radius: 10px; padding: 1.25rem 1.5rem; text-align: center;
 }
 .stat-value { font-size: 1.6rem; font-weight: 700; color: #4F8EF7; }
-.stat-label { font-size: 0.8rem; color: #6B7280; margin-top: 0.2rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.stat-label { font-size: 0.8rem; color: #6B7280; margin-top: 0.2rem;
+              letter-spacing: 0.04em; text-transform: uppercase; }
 .section-divider { border: none; border-top: 1px solid #1F2937; margin: 1.8rem 0; }
 .arch-block {
     background: #0D1117; border: 1px solid #1F2937; border-radius: 8px;
-    padding: 1rem 1.4rem; font-family: 'JetBrains Mono', 'Courier New', monospace;
+    padding: 1rem 1.4rem; font-family: 'Courier New', monospace;
     font-size: 0.78rem; color: #8B9CF4; white-space: pre; overflow-x: auto;
 }
-.badge-row a { text-decoration: none; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -91,8 +66,8 @@ st.markdown('<hr class="section-divider"/>', unsafe_allow_html=True)
 # ── Model status ──────────────────────────────────────────────────────────────
 if model_meta.get("is_fallback"):
     st.warning(
-        "Checkpoint not found. Running with randomly-initialized weights — "
-        "place `best_model.pth` in `checkpoints/` and restart.",
+        "Checkpoint not found — running with randomly-initialized weights. "
+        "Place `best_model.pth` in `checkpoints/` and restart.",
         icon="⚠️",
     )
 else:
@@ -107,14 +82,14 @@ else:
         icon="✅",
     )
 
-# ── Key stats ────────────────────────────────────────────────────────────────
+# ── Stats ─────────────────────────────────────────────────────────────────────
 st.subheader("Performance Summary")
 c1, c2, c3, c4 = st.columns(4)
 for col, val, label in [
-    (c1, "90.22%",  "Test Accuracy"),
-    (c2, "~2.8M",   "Parameters"),
-    (c3, "38",      "Training Epochs"),
-    (c4, "10",      "Object Classes"),
+    (c1, "90.22%", "Test Accuracy"),
+    (c2, "~2.8M",  "Parameters"),
+    (c3, "38",     "Training Epochs"),
+    (c4, "10",     "Object Classes"),
 ]:
     col.markdown(
         f'<div class="stat-card"><div class="stat-value">{val}</div>'
@@ -124,7 +99,7 @@ for col, val, label in [
 
 st.markdown('<hr class="section-divider"/>', unsafe_allow_html=True)
 
-# ── Architecture ─────────────────────────────────────────────────────────────
+# ── Architecture ──────────────────────────────────────────────────────────────
 st.subheader("Model Architecture")
 arch = """\
 Input  (3 x 32 x 32)
@@ -140,23 +115,22 @@ st.markdown(f'<div class="arch-block">{arch}</div>', unsafe_allow_html=True)
 
 st.markdown('<hr class="section-divider"/>', unsafe_allow_html=True)
 
-# ── Pages ────────────────────────────────────────────────────────────────────
-st.subheader("Navigate")
-pa, pb, pc, pd, pe = st.columns(5)
-pa.page_link("pages/1_Live_Prediction.py",  label="Live Prediction")
-pb.page_link("pages/2_GradCAM_Explorer.py", label="GradCAM Explorer")
-pc.page_link("pages/3_Model_Report.py",     label="Model Report")
-pd.page_link("pages/4_Dataset_Explorer.py", label="Dataset Explorer")
-pe.page_link("pages/5_Batch_Inference.py",  label="Batch Inference")
-
-# ── Sidebar ───────────────────────────────────────────────────────────────────
-with st.sidebar:
-    st.markdown("### CIFAR-10 Classifier")
-    st.caption("Kabir Patil · ResNet CNN · PyTorch")
-    st.divider()
-    st.markdown(
-        "**Classes**  \nairplane · automobile · bird · cat · deer  \n"
-        "dog · frog · horse · ship · truck"
-    )
-    st.divider()
-    st.caption("Built with PyTorch + Streamlit")
+# ── Results table ─────────────────────────────────────────────────────────────
+st.subheader("Test Set Results")
+import pandas as pd
+results = [
+    ("Airplane",    0.91, 0.90, 0.90),
+    ("Automobile",  0.94, 0.94, 0.94),
+    ("Bird",        0.88, 0.87, 0.87),
+    ("Cat",         0.80, 0.78, 0.79),
+    ("Deer",        0.90, 0.91, 0.90),
+    ("Dog",         0.84, 0.85, 0.84),
+    ("Frog",        0.93, 0.94, 0.93),
+    ("Horse",       0.94, 0.93, 0.94),
+    ("Ship",        0.94, 0.95, 0.94),
+    ("Truck",       0.94, 0.94, 0.94),
+]
+df = pd.DataFrame(results, columns=["Class", "Precision", "Recall", "F1-Score"])
+st.dataframe(df.style.background_gradient(subset=["F1-Score"], cmap="Blues"),
+             use_container_width=True, hide_index=True)
+st.caption("Overall Test Accuracy: **90.22%**  |  Macro F1: **0.905**")
