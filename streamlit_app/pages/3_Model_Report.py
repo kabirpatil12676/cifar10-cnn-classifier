@@ -34,7 +34,7 @@ CIFAR10_CLASSES = [
 ]
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.title("📋 Model Report")
+st.title("Model Report")
 st.markdown(
     "Complete evaluation results — confusion matrix, per-class metrics, "
     "training history, and error analysis."

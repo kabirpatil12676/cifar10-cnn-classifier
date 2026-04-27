@@ -45,7 +45,7 @@ device = next(model.parameters()).device
 model.eval()
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.title("📦 Batch Inference")
+st.title("Batch Inference")
 st.markdown(
     "Upload up to **50 images** and run inference on all of them at once. "
     "Download the results as CSV."

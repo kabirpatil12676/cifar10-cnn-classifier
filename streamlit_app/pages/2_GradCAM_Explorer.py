@@ -37,7 +37,7 @@ device = next(model.parameters()).device
 model.eval()   # FIX: explicit eval() before any inference
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.title("🔥 GradCAM Explorer")
+st.title("GradCAM Explorer")
 st.markdown(
     "Visualise **where the model is looking** when it makes a prediction. "
     "GradCAM highlights the spatial regions that contributed most to the decision."

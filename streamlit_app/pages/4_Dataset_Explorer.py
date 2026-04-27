@@ -34,7 +34,7 @@ from utils.visualization  import class_distribution_bar
 _NEAREST = Image.Resampling.NEAREST
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.title("🔬 Dataset Explorer")
+st.title("Dataset Explorer")
 st.markdown(
     "Explore the **CIFAR-10** dataset: 60,000 32×32 colour images across 10 classes."
 )
