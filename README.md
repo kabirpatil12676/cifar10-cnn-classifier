@@ -1,4 +1,4 @@
-# 🧠 CIFAR-10 Image Classification with Custom ResNet-CNN
+﻿# ðŸ§  CIFAR-10 Image Classification with Custom ResNet-CNN
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.3%2B-EE4C2C?logo=pytorch)](https://pytorch.org)
@@ -10,26 +10,26 @@
 
 ---
 
-## 🖼️ Demo Visualizations
+## ðŸ–¼ï¸ Demo Visualizations
 
 ### Training Curves
-![Training Curves](assets/training_curves.png)
+![Training Curves](assets/training_curves.png?v=2)
 
 ### Confusion Matrix
-![Confusion Matrix](assets/confusion_matrix.png)
+![Confusion Matrix](assets/confusion_matrix.png?v=2)
 
 ### Per-Class Accuracy
-![Per-Class Accuracy](assets/per_class_accuracy.png)
+![Per-Class Accuracy](assets/per_class_accuracy.png?v=2)
 
 ### GradCAM Interpretability
-![GradCAM Example](assets/gradcam_example.png)
+![GradCAM Example](assets/gradcam_example.png?v=2)
 
 ### Sample Images (CIFAR-10 Dataset)
-![Sample Grid](assets/sample_grid.png)
+![Sample Grid](assets/sample_grid.png?v=2)
 
 ---
 
-## 📊 Results
+## ðŸ“Š Results
 
 | Class        | Precision | Recall | F1-Score |
 |--------------|-----------|--------|----------|
@@ -49,49 +49,49 @@
 
 ---
 
-## 🏗️ Architecture
+## ðŸ—ï¸ Architecture
 
 ```
-Input (3×32×32)
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│  Block 1: ResidualBlock (3 → 64)        │
-│  Conv2d(3,64,3,p=1) → BN → ReLU        │
-│  Conv2d(64,64,3,p=1) → BN              │
-│  Skip: Conv1×1(3→64) → BN              │
-│  + Add → ReLU → MaxPool2d(2,2)         │
-│  Output: (64 × 16 × 16)               │
-└─────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│  Block 2: ResidualBlock (64 → 128)      │
-│  Conv2d(64,128,3,p=1) → BN → ReLU      │
-│  Conv2d(128,128,3,p=1) → BN            │
-│  Skip: Conv1×1(64→128) → BN            │
-│  + Add → ReLU → MaxPool2d(2,2)         │
-│  Output: (128 × 8 × 8)                │
-└─────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│  Block 3: ResidualBlock (128 → 256)     │
-│  Conv2d(128,256,3,p=1) → BN → ReLU     │
-│  Conv2d(256,256,3,p=1) → BN            │
-│  Skip: Conv1×1(128→256) → BN           │
-│  + Add → ReLU → AdaptiveAvgPool2d(2,2) │
-│  Output: (256 × 2 × 2)                │
-└─────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────┐
-│  Head: Classification                   │
-│  Flatten → Linear(1024→512) → ReLU     │
-│  Dropout(0.4) → Linear(512→10)         │
-└─────────────────────────────────────────┘
-     │
-     ▼
+Input (3Ã—32Ã—32)
+     â”‚
+     â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Block 1: ResidualBlock (3 â†’ 64)        â”‚
+â”‚  Conv2d(3,64,3,p=1) â†’ BN â†’ ReLU        â”‚
+â”‚  Conv2d(64,64,3,p=1) â†’ BN              â”‚
+â”‚  Skip: Conv1Ã—1(3â†’64) â†’ BN              â”‚
+â”‚  + Add â†’ ReLU â†’ MaxPool2d(2,2)         â”‚
+â”‚  Output: (64 Ã— 16 Ã— 16)               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+     â”‚
+     â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Block 2: ResidualBlock (64 â†’ 128)      â”‚
+â”‚  Conv2d(64,128,3,p=1) â†’ BN â†’ ReLU      â”‚
+â”‚  Conv2d(128,128,3,p=1) â†’ BN            â”‚
+â”‚  Skip: Conv1Ã—1(64â†’128) â†’ BN            â”‚
+â”‚  + Add â†’ ReLU â†’ MaxPool2d(2,2)         â”‚
+â”‚  Output: (128 Ã— 8 Ã— 8)                â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+     â”‚
+     â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Block 3: ResidualBlock (128 â†’ 256)     â”‚
+â”‚  Conv2d(128,256,3,p=1) â†’ BN â†’ ReLU     â”‚
+â”‚  Conv2d(256,256,3,p=1) â†’ BN            â”‚
+â”‚  Skip: Conv1Ã—1(128â†’256) â†’ BN           â”‚
+â”‚  + Add â†’ ReLU â†’ AdaptiveAvgPool2d(2,2) â”‚
+â”‚  Output: (256 Ã— 2 Ã— 2)                â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+     â”‚
+     â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Head: Classification                   â”‚
+â”‚  Flatten â†’ Linear(1024â†’512) â†’ ReLU     â”‚
+â”‚  Dropout(0.4) â†’ Linear(512â†’10)         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+     â”‚
+     â–¼
  Logits (10)
 ```
 
@@ -99,7 +99,7 @@ Input (3×32×32)
 
 ---
 
-## ⚡ Quick Start
+## âš¡ Quick Start
 
 ```bash
 # 1. Clone the repo
@@ -124,66 +124,66 @@ python inference.py --image path/to/image.jpg --checkpoint checkpoints/best_mode
 
 ---
 
-## 📁 Project Structure
+## ðŸ“ Project Structure
 
 ```
 cifar10-cnn-classifier/
-├── README.md
-├── requirements.txt
-├── setup.py
-├── assets/                      ← README visualizations
-├── config/
-│   └── config.yaml              ← All hyperparameters in one place
-├── data/
-│   └── dataloader.py            ← Dataset, augmentation, splits
-├── models/
-│   └── cnn_model.py             ← ResNet-inspired CNN architecture
-├── training/
-│   ├── trainer.py               ← Training loop, early stopping, AMP
-│   └── losses.py                ← Label Smoothing CrossEntropy
-├── evaluation/
-│   └── evaluator.py             ← Accuracy, F1, confusion matrix
-├── visualization/
-│   ├── plot_results.py          ← Loss curves, confusion matrix, charts
-│   └── gradcam.py               ← GradCAM interpretability
-├── utils/
-│   ├── logger.py                ← Structured timestamped logging
-│   └── seed.py                  ← Full reproducibility seeding
-├── main.py                      ← CLI: train / eval / visualize
-├── inference.py                 ← Single-image prediction
-├── streamlit_app/               ← Interactive web demo
-└── notebooks/
-    └── CIFAR10_Analysis.ipynb
+â”œâ”€â”€ README.md
+â”œâ”€â”€ requirements.txt
+â”œâ”€â”€ setup.py
+â”œâ”€â”€ assets/                      â† README visualizations
+â”œâ”€â”€ config/
+â”‚   â””â”€â”€ config.yaml              â† All hyperparameters in one place
+â”œâ”€â”€ data/
+â”‚   â””â”€â”€ dataloader.py            â† Dataset, augmentation, splits
+â”œâ”€â”€ models/
+â”‚   â””â”€â”€ cnn_model.py             â† ResNet-inspired CNN architecture
+â”œâ”€â”€ training/
+â”‚   â”œâ”€â”€ trainer.py               â† Training loop, early stopping, AMP
+â”‚   â””â”€â”€ losses.py                â† Label Smoothing CrossEntropy
+â”œâ”€â”€ evaluation/
+â”‚   â””â”€â”€ evaluator.py             â† Accuracy, F1, confusion matrix
+â”œâ”€â”€ visualization/
+â”‚   â”œâ”€â”€ plot_results.py          â† Loss curves, confusion matrix, charts
+â”‚   â””â”€â”€ gradcam.py               â† GradCAM interpretability
+â”œâ”€â”€ utils/
+â”‚   â”œâ”€â”€ logger.py                â† Structured timestamped logging
+â”‚   â””â”€â”€ seed.py                  â† Full reproducibility seeding
+â”œâ”€â”€ main.py                      â† CLI: train / eval / visualize
+â”œâ”€â”€ inference.py                 â† Single-image prediction
+â”œâ”€â”€ streamlit_app/               â† Interactive web demo
+â””â”€â”€ notebooks/
+    â””â”€â”€ CIFAR10_Analysis.ipynb
 ```
 
 ---
 
-## 🔑 Key Techniques
+## ðŸ”‘ Key Techniques
 
-- **Residual Skip Connections** — Prevents vanishing gradients, enables deeper learning
-- **Batch Normalization** — Stabilizes training, reduces internal covariate shift
-- **Data Augmentation** — RandomCrop, HorizontalFlip, ColorJitter to prevent overfitting
-- **Label Smoothing Loss** — Prevents overconfident predictions (smoothing=0.1)
-- **AdamW + CosineAnnealingLR** — Better convergence than fixed LR schedules
-- **Mixed Precision Training** — 2× faster training on supported GPUs
-- **Early Stopping** — Prevents overfitting with patience=15
-- **GradCAM** — Visual interpretability: see what the model focuses on
-- **Proper Normalization** — CIFAR-10 channel-wise stats (not generic 0.5)
-- **Reproducibility** — Fixed seeds across torch, numpy, random, cuda
+- **Residual Skip Connections** â€” Prevents vanishing gradients, enables deeper learning
+- **Batch Normalization** â€” Stabilizes training, reduces internal covariate shift
+- **Data Augmentation** â€” RandomCrop, HorizontalFlip, ColorJitter to prevent overfitting
+- **Label Smoothing Loss** â€” Prevents overconfident predictions (smoothing=0.1)
+- **AdamW + CosineAnnealingLR** â€” Better convergence than fixed LR schedules
+- **Mixed Precision Training** â€” 2Ã— faster training on supported GPUs
+- **Early Stopping** â€” Prevents overfitting with patience=15
+- **GradCAM** â€” Visual interpretability: see what the model focuses on
+- **Proper Normalization** â€” CIFAR-10 channel-wise stats (not generic 0.5)
+- **Reproducibility** â€” Fixed seeds across torch, numpy, random, cuda
 
 ---
 
-## 🌐 Interactive Demo
+## ðŸŒ Interactive Demo
 
 A full multi-page Streamlit app is included in [`streamlit_app/`](streamlit_app/):
 
 | Page | Description |
 |---|---|
-| 🖼️ Live Prediction | Upload any image → top-5 predictions with confidence chart |
-| 🔥 GradCAM Explorer | Visualise where the model looks with heatmap overlay |
-| 📋 Model Report | Full evaluation: confusion matrix, per-class F1, training curves |
-| 🔬 Dataset Explorer | CIFAR-10 EDA: class distribution, sample grid, augmentation preview |
-| 📦 Batch Inference | Upload 50 images → download predictions as CSV |
+| ðŸ–¼ï¸ Live Prediction | Upload any image â†’ top-5 predictions with confidence chart |
+| ðŸ”¥ GradCAM Explorer | Visualise where the model looks with heatmap overlay |
+| ðŸ“‹ Model Report | Full evaluation: confusion matrix, per-class F1, training curves |
+| ðŸ”¬ Dataset Explorer | CIFAR-10 EDA: class distribution, sample grid, augmentation preview |
+| ðŸ“¦ Batch Inference | Upload 50 images â†’ download predictions as CSV |
 
 ```bash
 cd streamlit_app
@@ -193,7 +193,7 @@ streamlit run app.py
 
 ---
 
-## 🛠️ Configuration
+## ðŸ› ï¸ Configuration
 
 All hyperparameters are centralized in `config/config.yaml`:
 
@@ -209,7 +209,7 @@ training:
 
 ---
 
-## 📋 Requirements
+## ðŸ“‹ Requirements
 
 - Python 3.9+
 - PyTorch 2.3+
@@ -218,14 +218,15 @@ training:
 
 ---
 
-## 👤 Author
+## ðŸ‘¤ Author
 
 **Kabir Patil**
-- 🔗 [LinkedIn](https://www.linkedin.com/in/kabir-patil-7a2a9b30b/)
-- 🐙 [GitHub](https://github.com/kabirpatil12676)
+- ðŸ”— [LinkedIn](https://www.linkedin.com/in/kabir-patil-7a2a9b30b/)
+- ðŸ™ [GitHub](https://github.com/kabirpatil12676)
 
 ---
 
-## 📄 License
+## ðŸ“„ License
 
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License â€” see [LICENSE](LICENSE) for details.
+
