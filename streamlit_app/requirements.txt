@@ -1,0 +1,22 @@
+# ── Core ─────────────────────────────────────────────────────────────────────
+# FIX: no +cuXXX suffix — Streamlit Cloud is CPU-only
+# FIX: torchaudio removed — not needed; reduces cold-start time
+streamlit>=1.32.0
+torch>=2.3.0
+torchvision>=0.18.0
+
+# ── Image processing ──────────────────────────────────────────────────────────
+# FIX: opencv-python-headless (not opencv-python) — avoids Qt display errors on cloud
+opencv-python-headless>=4.9.0.80
+Pillow>=10.3.0
+
+# ── Visualization ─────────────────────────────────────────────────────────────
+plotly>=5.20.0
+matplotlib>=3.8.4
+seaborn>=0.13.2
+
+# ── Data / ML utils ───────────────────────────────────────────────────────────
+numpy>=1.26.4
+pandas>=2.2.0
+scikit-learn>=1.4.2
+pyyaml>=6.0.1

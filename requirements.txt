@@ -1,0 +1,28 @@
+# Core deep learning
+torch>=2.3.0
+torchvision>=0.18.0
+torchaudio>=2.3.0
+
+# Data science & numerics
+numpy>=1.26.4
+scikit-learn>=1.4.2
+
+# Visualization
+matplotlib>=3.8.4
+seaborn>=0.13.2
+pillow>=10.3.0
+
+# Utilities
+pyyaml>=6.0.1
+tqdm>=4.66.4
+
+# Model inspection
+torchsummary>=1.5.1
+
+# Notebook support
+jupyter>=1.0.0
+ipykernel>=6.29.4
+ipywidgets>=8.1.2
+
+# Image processing (for GradCAM overlay)
+opencv-python>=4.9.0.80
