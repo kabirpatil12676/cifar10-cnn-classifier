@@ -13,19 +13,19 @@
 ## ðŸ–¼ï¸ Demo Visualizations
 
 ### Training Curves
-![Training Curves](assets/training_curves.png?v=2)
+![Training Curves](assets/training_curves_v2.png)
 
 ### Confusion Matrix
-![Confusion Matrix](assets/confusion_matrix.png?v=2)
+![Confusion Matrix](assets/confusion_matrix_v2.png)
 
 ### Per-Class Accuracy
-![Per-Class Accuracy](assets/per_class_accuracy.png?v=2)
+![Per-Class Accuracy](assets/per_class_accuracy_v2.png)
 
 ### GradCAM Interpretability
-![GradCAM Example](assets/gradcam_example.png?v=2)
+![GradCAM Example](assets/gradcam_example_v2.png)
 
 ### Sample Images (CIFAR-10 Dataset)
-![Sample Grid](assets/sample_grid.png?v=2)
+![Sample Grid](assets/sample_grid_v2.png)
 
 ---
 
@@ -229,4 +229,5 @@ training:
 ## ðŸ“„ License
 
 This project is licensed under the MIT License â€” see [LICENSE](LICENSE) for details.
+
 
