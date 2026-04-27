@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import io
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -28,6 +29,32 @@ from utils.preprocessing import (
     CIFAR10_CLASSES, preprocess_image, get_augmentation_samples,
 )
 from utils.visualization import top_k_bar_chart
+
+_CIFAR_CACHE = Path(tempfile.gettempdir()) / "cifar10_streamlit"
+
+@st.cache_data(show_spinner=False)
+def _get_class_samples(class_name: str, n: int = 4) -> list[bytes]:
+    """Return `n` real CIFAR-10 test images for `class_name` as PNG bytes."""
+    try:
+        from torchvision.datasets import CIFAR10
+        from torchvision import transforms
+        ds  = CIFAR10(root=str(_CIFAR_CACHE), train=False, download=True,
+                      transform=transforms.ToTensor())
+        idx = CIFAR10_CLASSES.index(class_name)
+        results: list[bytes] = []
+        for img_t, lbl in ds:
+            if lbl == idx:
+                pil = Image.fromarray(
+                    (img_t.permute(1, 2, 0).numpy() * 255).astype(np.uint8)
+                ).resize((96, 96), Image.Resampling.NEAREST)
+                buf = io.BytesIO()
+                pil.save(buf, format="PNG")
+                results.append(buf.getvalue())
+                if len(results) == n:
+                    break
+        return results
+    except Exception:
+        return []  # fall back silently — caller handles empty list
 
 # ── Guard: model must be loaded via app.py first ──────────────────────────────
 if "model" not in st.session_state:
@@ -165,12 +192,12 @@ with col_res:
                               title=f"Top-{top_k} Predictions")
         st.plotly_chart(fig, use_container_width=True)
 
-        with st.expander(f"🔍 What does a '{pred_class}' look like?"):
-            st.markdown(
-                f"Placeholder tiles for **{pred_class}**. "
-                "In production these would be real CIFAR-10 test images."
-            )
-            exp_cols = st.columns(4)
-            for i, ec in enumerate(exp_cols):
-                ec.image(_make_placeholder(pred_class),
-                         caption=f"{pred_class} #{i+1}", use_container_width=True)
+        with st.expander(f"What does a '{pred_class}' look like? (real CIFAR-10 examples)"):
+            real_imgs = _get_class_samples(pred_class, n=4)
+            if real_imgs:
+                exp_cols = st.columns(4)
+                for i, (ec, img_bytes) in enumerate(zip(exp_cols, real_imgs)):
+                    ec.image(img_bytes, caption=f"{pred_class} #{i+1}",
+                             use_container_width=True)
+            else:
+                st.info("CIFAR-10 samples not available offline.", icon="ℹ️")
