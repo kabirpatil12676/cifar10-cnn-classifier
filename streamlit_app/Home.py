@@ -119,18 +119,18 @@ st.markdown('<hr class="section-divider"/>', unsafe_allow_html=True)
 st.subheader("Test Set Results")
 import pandas as pd
 results = [
-    ("Airplane",    0.91, 0.90, 0.90),
-    ("Automobile",  0.94, 0.94, 0.94),
-    ("Bird",        0.88, 0.87, 0.87),
-    ("Cat",         0.80, 0.78, 0.79),
-    ("Deer",        0.90, 0.91, 0.90),
-    ("Dog",         0.84, 0.85, 0.84),
-    ("Frog",        0.93, 0.94, 0.93),
-    ("Horse",       0.94, 0.93, 0.94),
-    ("Ship",        0.94, 0.95, 0.94),
-    ("Truck",       0.94, 0.94, 0.94),
+    ("Airplane",    0.922, 0.881, 0.901),
+    ("Automobile",  0.956, 0.961, 0.959),
+    ("Bird",        0.899, 0.848, 0.873),
+    ("Cat",         0.802, 0.803, 0.803),
+    ("Deer",        0.917, 0.879, 0.897),
+    ("Dog",         0.863, 0.843, 0.853),
+    ("Frog",        0.955, 0.927, 0.941),
+    ("Horse",       0.870, 0.962, 0.914),
+    ("Ship",        0.915, 0.970, 0.942),
+    ("Truck",       0.928, 0.948, 0.938),
 ]
 df = pd.DataFrame(results, columns=["Class", "Precision", "Recall", "F1-Score"])
 st.dataframe(df.style.background_gradient(subset=["F1-Score"], cmap="Blues"),
              use_container_width=True, hide_index=True)
-st.caption("Overall Test Accuracy: **90.22%**  |  Macro F1: **0.905**")
+st.caption("Overall Test Accuracy: **90.22%**  |  Macro F1: **0.902**  |  Weighted F1: **0.902**")
