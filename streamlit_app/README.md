@@ -87,7 +87,7 @@ cifar10-streamlit-app/
 ## 👤 Author
 
 **Kabir Patil**
-- 💼 [LinkedIn](https://linkedin.com/in/yourprofile)
+- 💼 [LinkedIn](https://www.linkedin.com/in/kabir-patil-7a2a9b30b/)
 - 🐙 [GitHub](https://github.com/kabirpatil12676)
 
 ---
