@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.3%2B-EE4C2C?logo=pytorch)](https://pytorch.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Accuracy](https://img.shields.io/badge/Test%20Accuracy-88%25%2B-brightgreen)]()
+[![Accuracy](https://img.shields.io/badge/Test%20Accuracy-90.22%25-brightgreen)]()
 [![Stars](https://img.shields.io/github/stars/kabirpatil12676/cifar10-cnn-classifier?style=social)](https://github.com/kabirpatil12676/cifar10-cnn-classifier)
 
 > A production-grade deep learning pipeline for image classification on CIFAR-10, featuring a custom ResNet-inspired CNN with residual skip connections, label-smoothing loss, mixed-precision training, GradCAM interpretability, and a full evaluation + visualization suite.
@@ -95,7 +95,7 @@ Input (3×32×32)
  Logits (10)
 ```
 
-**Total Parameters: ~2.8M**
+**Total Parameters: ~2.8M** &nbsp;|&nbsp; Trained for 38 epochs on CIFAR-10 (50K train / 10K test)
 
 ---
 
