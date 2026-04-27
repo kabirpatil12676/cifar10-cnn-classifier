@@ -68,8 +68,9 @@ cifar10-streamlit-app/
 
 1. Push this folder to a GitHub repo.
 2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**.
-3. Point to `streamlit_app/app.py` as the entry point.
-4. Add `checkpoints/best_model.pth` via Streamlit Secrets or Git LFS.
+3. Set **Repository** to `kabirpatil12676/cifar10-cnn-classifier`.
+4. Set **Main file path** to `streamlit_app/app.py`.
+5. Click **Deploy**.
 
 ---
 
@@ -85,9 +86,9 @@ cifar10-streamlit-app/
 
 ## 👤 Author
 
-**Your Name**
+**Kabir Patil**
 - 💼 [LinkedIn](https://linkedin.com/in/yourprofile)
-- 🐙 [GitHub](https://github.com/yourusername)
+- 🐙 [GitHub](https://github.com/kabirpatil12676)
 
 ---
 

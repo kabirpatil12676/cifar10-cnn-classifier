@@ -87,11 +87,11 @@ st.markdown(
 
 col_gh, col_li, col_nb, _ = st.columns([1, 1, 1, 5])
 with col_gh:
-    st.link_button("⭐ GitHub",   "https://github.com/yourusername/cifar10-cnn-classifier")
+    st.link_button("⭐ GitHub",   "https://github.com/kabirpatil12676/cifar10-cnn-classifier")
 with col_li:
     st.link_button("💼 LinkedIn", "https://linkedin.com/in/yourprofile")
 with col_nb:
-    st.link_button("📓 Notebook", "https://github.com/yourusername/cifar10-cnn-classifier/blob/main/notebooks/CIFAR10_Analysis.ipynb")
+    st.link_button("📓 Notebook", "https://github.com/kabirpatil12676/cifar10-cnn-classifier/blob/main/notebooks/CIFAR10_Analysis.ipynb")
 
 st.divider()
 
