@@ -10,21 +10,40 @@
 
 ---
 
+## 🖼️ Demo Visualizations
+
+### Training Curves
+![Training Curves](assets/training_curves.png)
+
+### Confusion Matrix
+![Confusion Matrix](assets/confusion_matrix.png)
+
+### Per-Class Accuracy
+![Per-Class Accuracy](assets/per_class_accuracy.png)
+
+### GradCAM Interpretability
+![GradCAM Example](assets/gradcam_example.png)
+
+### Sample Images (CIFAR-10 Dataset)
+![Sample Grid](assets/sample_grid.png)
+
+---
+
 ## 📊 Results
 
-| Class       | Precision | Recall | F1-Score |
-|-------------|-----------|--------|----------|
-| Airplane    | 0.91      | 0.90   | 0.90     |
-| Automobile  | 0.93      | 0.95   | 0.94     |
-| Bird        | 0.84      | 0.82   | 0.83     |
-| Cat         | 0.79      | 0.77   | 0.78     |
-| Deer        | 0.88      | 0.90   | 0.89     |
-| Dog         | 0.82      | 0.83   | 0.82     |
-| Frog        | 0.92      | 0.93   | 0.92     |
-| Horse       | 0.93      | 0.92   | 0.92     |
-| Ship        | 0.93      | 0.94   | 0.93     |
-| Truck       | 0.92      | 0.93   | 0.93     |
-| **Macro Avg** | **0.89** | **0.89** | **0.89** |
+| Class        | Precision | Recall | F1-Score |
+|--------------|-----------|--------|----------|
+| Airplane     | 0.91      | 0.90   | 0.90     |
+| Automobile   | 0.93      | 0.95   | 0.94     |
+| Bird         | 0.84      | 0.82   | 0.83     |
+| Cat          | 0.79      | 0.77   | 0.78     |
+| Deer         | 0.88      | 0.90   | 0.89     |
+| Dog          | 0.82      | 0.83   | 0.82     |
+| Frog         | 0.92      | 0.93   | 0.92     |
+| Horse        | 0.93      | 0.92   | 0.92     |
+| Ship         | 0.93      | 0.94   | 0.93     |
+| Truck        | 0.92      | 0.93   | 0.93     |
+| **Macro Avg**| **0.89**  | **0.89**| **0.89**|
 
 **Overall Test Accuracy: 88.7%**
 
@@ -112,25 +131,27 @@ cifar10-cnn-classifier/
 ├── README.md
 ├── requirements.txt
 ├── setup.py
+├── assets/                      ← README visualizations
 ├── config/
-│   └── config.yaml          ← All hyperparameters in one place
+│   └── config.yaml              ← All hyperparameters in one place
 ├── data/
-│   └── dataloader.py        ← Dataset, augmentation, splits
+│   └── dataloader.py            ← Dataset, augmentation, splits
 ├── models/
-│   └── cnn_model.py         ← ResNet-inspired CNN architecture
+│   └── cnn_model.py             ← ResNet-inspired CNN architecture
 ├── training/
-│   ├── trainer.py           ← Training loop, early stopping, AMP
-│   └── losses.py            ← Label Smoothing CrossEntropy
+│   ├── trainer.py               ← Training loop, early stopping, AMP
+│   └── losses.py                ← Label Smoothing CrossEntropy
 ├── evaluation/
-│   └── evaluator.py         ← Accuracy, F1, confusion matrix
+│   └── evaluator.py             ← Accuracy, F1, confusion matrix
 ├── visualization/
-│   ├── plot_results.py      ← Loss curves, confusion matrix, charts
-│   └── gradcam.py           ← GradCAM interpretability
+│   ├── plot_results.py          ← Loss curves, confusion matrix, charts
+│   └── gradcam.py               ← GradCAM interpretability
 ├── utils/
-│   ├── logger.py            ← Structured timestamped logging
-│   └── seed.py              ← Full reproducibility seeding
-├── main.py                  ← CLI: train / eval / visualize
-├── inference.py             ← Single-image prediction
+│   ├── logger.py                ← Structured timestamped logging
+│   └── seed.py                  ← Full reproducibility seeding
+├── main.py                      ← CLI: train / eval / visualize
+├── inference.py                 ← Single-image prediction
+├── streamlit_app/               ← Interactive web demo
 └── notebooks/
     └── CIFAR10_Analysis.ipynb
 ```
@@ -152,10 +173,23 @@ cifar10-cnn-classifier/
 
 ---
 
-## 📈 Training Curves
+## 🌐 Interactive Demo
 
-> Training curves, confusion matrix, per-class accuracy, GradCAM heatmaps
-> are automatically saved to the `results/` folder after running visualize mode.
+A full multi-page Streamlit app is included in [`streamlit_app/`](streamlit_app/):
+
+| Page | Description |
+|---|---|
+| 🖼️ Live Prediction | Upload any image → top-5 predictions with confidence chart |
+| 🔥 GradCAM Explorer | Visualise where the model looks with heatmap overlay |
+| 📋 Model Report | Full evaluation: confusion matrix, per-class F1, training curves |
+| 🔬 Dataset Explorer | CIFAR-10 EDA: class distribution, sample grid, augmentation preview |
+| 📦 Batch Inference | Upload 50 images → download predictions as CSV |
+
+```bash
+cd streamlit_app
+pip install -r requirements.txt
+streamlit run app.py
+```
 
 ---
 
